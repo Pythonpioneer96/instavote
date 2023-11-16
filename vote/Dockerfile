@@ -1,11 +1,11 @@
 # Using official python runtime base image
-FROM schoolofdevops/voteapp-python:v0.1.0
+FROM schoolofdevops/vote:v4
 
 # Set the application directory
 WORKDIR /app
 
 # Install our requirements.txt
-ADD requirements.txt /app/requirements.txt
+ADD vote/requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 
 # Copy our code from the current folder to /app inside the container
