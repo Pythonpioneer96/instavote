@@ -1,3 +1,19 @@
+@NonCPS
+boolean isMyDirChanged() {
+  for (changeLogSet in currentBuild.changeSets) { 
+    for (entry in changeLogSet.getItems()) { // for each commit in the detected changes
+      for (file in entry.getAffectedFiles()) {
+        println(file.getPath() + "Printing path of changeset file")
+        if (file.getPath().matches("vote(/.*)")) {
+          return true
+        }
+      }
+    }
+  }
+  return false
+}
+
+
 node {
     def app
 
@@ -8,10 +24,17 @@ node {
     }
 
     stage('Build image') {
+        if(isMyDirChanged()) {
   
        app = docker.build("javancrosdale1996/test_vote", "-f ./vote/Dockerfile .")
+                 }  else  {
+                       currentBuild.result = "SUCCESS"
+                       return
     }
-
+}
+     if(currentBuild.result == "SUCCESS")  {
+       return
+}
     stage('Test image') {
   
 
