@@ -18,7 +18,7 @@ spec:
         app: result
     spec:
       containers:
-      - image: javancrosdale1996/test_result:latest
+      - image: javancrosdale1996/test_result:2
         name: vote-result
         resources: {}
 status: {}
