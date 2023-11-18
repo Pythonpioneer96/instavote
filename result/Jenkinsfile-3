@@ -26,7 +26,7 @@ node {
     stage('Build image') {
         if (isMyDirChanged()) {
   
-       app = docker.build("javancrosdale1996/test_result")
+       app = docker.build("javancrosdale1996/test_result", "-f ./vote/Dockerfile .")
                  }  else  {
                        currentBuild.result = "SUCCESS"
                        return
